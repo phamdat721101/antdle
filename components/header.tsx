@@ -1,11 +1,19 @@
 "use client"
 
+import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
+
 interface HeaderProps {
   activeSection: string
   onSectionChange: (section: string) => void
 }
 
 export default function Header({ activeSection, onSectionChange }: HeaderProps) {
+  const { address, isConnected, connectWallet, disconnect, isInMiniApp } = useBaseMiniApp()
+
+  const formatAddress = (address: string) => {
+    return `${address.slice(0, 6)}...${address.slice(-4)}`
+  }
+
   return (
     <header className="header">
       <div className="container">
@@ -14,7 +22,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
             <div className="pixel-logo">
               <div className="logo-pixels">🎮</div>
             </div>
-            <h1>ANTDLE</h1>
+            <h1>ANTDLE {isInMiniApp && <span className="text-blue-500">⚡</span>}</h1>
           </div>
           <nav className="header__nav">
             <button
@@ -39,20 +47,31 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
               className={`nav-btn ${activeSection === "premium" ? "active" : ""}`}
               onClick={() => onSectionChange("premium")}
             >
-              <span className="nav-icon">👑</span> UPGRADE
+              <span className="nav-icon">💎</span> PREMIUM
             </button>
             <button
               className={`nav-btn ${activeSection === "portfolio" ? "active" : ""}`}
               onClick={() => onSectionChange("portfolio")}
             >
-              <span className="nav-icon">👤</span> MY PROGRESS
+              <span className="nav-icon">👤</span> PROFILE
             </button>
           </nav>
-          <div className="header__actions">
-            <a href="https://t.me/Coredevworkshop" target="_blank" rel="noopener noreferrer" className="btn-telegram">
-              <span className="telegram-icon">💬</span>
-              JOIN OUR COMMUNITY
-            </a>
+          <div className="header__wallet">
+            {isConnected ? (
+              <button 
+                className="btn-pixel btn-secondary"
+                onClick={() => disconnect()}
+              >
+                {formatAddress(address!)}
+              </button>
+            ) : (
+              <button 
+                className="btn-pixel btn-primary"
+                onClick={connectWallet}
+              >
+                Connect Wallet
+              </button>
+            )}
           </div>
         </div>
       </div>
