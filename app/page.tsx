@@ -10,11 +10,17 @@ import Portfolio from "@/components/portfolio"
 import ProtocolModal from "@/components/protocol-modal"
 import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
 import type { Protocol } from "@/lib/data"
+import { useMiniKit } from '@coinbase/onchainkit/minikit';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
   const { isSdkReady, isInMiniApp } = useBaseMiniApp()
+  const { setFrameReady, isFrameReady } = useMiniKit();
+  useEffect(() => {
+    if (!isFrameReady) setFrameReady();
+  }, [isFrameReady, setFrameReady]);
+
 
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
