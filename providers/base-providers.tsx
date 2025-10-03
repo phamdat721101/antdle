@@ -6,6 +6,8 @@ import { base } from 'viem/chains'
 import { WagmiProvider } from 'wagmi'
 import { createConfig, http } from 'wagmi'
 import { coinbaseWallet } from 'wagmi/connectors'
+import { sdk } from "@farcaster/miniapp-sdk";
+import { useState, useEffect } from "react"
 
 const config = createConfig({
   chains: [base],
@@ -23,6 +25,9 @@ const config = createConfig({
 const queryClient = new QueryClient()
 
 export function BaseProviders({ children }: { children: React.ReactNode }) {
+  useEffect(() => {
+    sdk.actions.ready();
+  }, [])
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
