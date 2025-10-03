@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Header from "@/components/header"
 import Dashboard from "@/components/dashboard"
 import Learn from "@/components/learn"
@@ -10,17 +10,15 @@ import Portfolio from "@/components/portfolio"
 import ProtocolModal from "@/components/protocol-modal"
 import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
 import type { Protocol } from "@/lib/data"
-import { useMiniKit } from '@coinbase/onchainkit/minikit';
+import { sdk } from '@farcaster/miniapp-sdk';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
   const { isSdkReady, isInMiniApp } = useBaseMiniApp()
-  const { setFrameReady, isFrameReady } = useMiniKit();
   useEffect(() => {
-    if (!isFrameReady) setFrameReady();
-  }, [isFrameReady, setFrameReady]);
-
+      sdk.actions.ready();
+  }, []);
 
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
