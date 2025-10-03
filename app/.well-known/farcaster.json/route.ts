@@ -36,7 +36,7 @@ export async function GET() {
       "heroImageUrl": `${URL}/antdle_btc.png`,
       "tagline": "Master Bitcoin DeFi",
       "ogTitle": "ANTDLE - Learn Bitcoin DeFi",
-      "ogDescription": "Learn Bitcoin DeFi through simple lessons and fun challenges. Built as a Base Mini-App for seamless onchain experiences.",
+      "ogDescription": "Learn Bitcoin DeFi through simple lessons and fun challenges",
       "ogImageUrl": `${URL}/antdle_btc.png`,
       "noindex": false
     }
