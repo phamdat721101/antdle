@@ -11,14 +11,18 @@ import ProtocolModal from "@/components/protocol-modal"
 import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
 import type { Protocol } from "@/lib/data"
 import { sdk } from '@farcaster/miniapp-sdk';
+import { useQuickAuth,useMiniKit } from "@coinbase/onchainkit/minikit";
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
-  const { isSdkReady, isInMiniApp } = useBaseMiniApp()
+  const { isFrameReady, setFrameReady, context } = useMiniKit();
+  // Initialize the  miniapp
   useEffect(() => {
-      sdk.actions.ready();
-  }, []);
+    if (!isFrameReady) {
+      setFrameReady();
+    }
+  }, [setFrameReady, isFrameReady]);
 
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
