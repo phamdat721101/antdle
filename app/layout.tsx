@@ -17,10 +17,10 @@ export const metadata: Metadata = {
   // Base Mini-App specific metadata
   other: {
     'fc:frame': 'vNext',
-    'fc:frame:image': 'https://your-domain.com/og-image.png',
+    'fc:frame:image': 'https://antdle.xyz/antdle_btc.png',
     'fc:frame:button:1': 'Learn Bitcoin DeFi',
     'fc:frame:button:1:action': 'link',
-    'fc:frame:button:1:target': 'https://your-domain.com',
+    'fc:frame:button:1:target': 'https://antdle.xyz',
   },
 }
 
@@ -33,9 +33,20 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <BaseProviders>
-          {children}
+          <ErrorBoundary>
+            {children}
+          </ErrorBoundary>
         </BaseProviders>
       </body>
     </html>
+  )
+}
+
+// Simple error boundary for SDK errors
+function ErrorBoundary({ children }: { children: React.ReactNode }) {
+  return (
+    <div>
+      {children}
+    </div>
   )
 }

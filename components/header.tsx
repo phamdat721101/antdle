@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export default function Header({ activeSection, onSectionChange }: HeaderProps) {
-  const { address, isConnected, connectWallet, disconnect, isInMiniApp } = useBaseMiniApp()
+  const { address, isConnected, connectWallet, disconnect, isInMiniApp, isSdkReady } = useBaseMiniApp()
 
   const formatAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`
@@ -22,7 +22,10 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
             <div className="pixel-logo">
               <div className="logo-pixels">🎮</div>
             </div>
-            <h1>ANTDLE {isInMiniApp && <span className="text-blue-500">⚡</span>}</h1>
+            <h1>
+              ANTDLE 
+              {isInMiniApp && isSdkReady && <span className="text-blue-500">⚡</span>}
+            </h1>
           </div>
           <nav className="header__nav">
             <button
@@ -68,8 +71,9 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
               <button 
                 className="btn-pixel btn-primary"
                 onClick={connectWallet}
+                disabled={isInMiniApp && !isSdkReady}
               >
-                Connect Wallet
+                {isInMiniApp && !isSdkReady ? 'Loading...' : 'Connect Wallet'}
               </button>
             )}
           </div>
