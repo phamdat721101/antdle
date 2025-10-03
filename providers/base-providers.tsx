@@ -35,6 +35,7 @@ export function BaseProviders({ children }: { children: React.ReactNode }) {
               theme: 'base',
             },
           }}
+          miniKit={{ enabled: true }}
         >
           {children}
         </OnchainKitProvider>

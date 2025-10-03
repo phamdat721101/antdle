@@ -33,7 +33,7 @@ export default function Home() {
   }
 
   // Show loading screen while SDK initializes (only in mini-app environment)
-  if (isInMiniApp && !isSdkReady) {
+  if (isFrameReady) {
     return (
       <div className="loading-container" style={{
         display: 'flex',
