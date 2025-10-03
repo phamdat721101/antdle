@@ -34,24 +34,24 @@ export default function Home() {
   }
 
   // Show loading screen while SDK initializes (only in mini-app environment)
-  if (isFrameReady) {
-    return (
-      <div className="loading-container" style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        background: 'var(--pixel-bg-dark)',
-        color: 'var(--pixel-text-white)',
-        flexDirection: 'column',
-        gap: '20px'
-      }}>
-        <div className="pixel-logo" style={{ fontSize: '48px' }}>🎮</div>
-        <h2>Loading ANTDLE...</h2>
-        <div className="loading-spinner">⚡</div>
-      </div>
-    )
-  }
+  // if (isFrameReady) {
+  //   return (
+  //     <div className="loading-container" style={{
+  //       display: 'flex',
+  //       justifyContent: 'center',
+  //       alignItems: 'center',
+  //       height: '100vh',
+  //       background: 'var(--pixel-bg-dark)',
+  //       color: 'var(--pixel-text-white)',
+  //       flexDirection: 'column',
+  //       gap: '20px'
+  //     }}>
+  //       <div className="pixel-logo" style={{ fontSize: '48px' }}>🎮</div>
+  //       <h2>Loading ANTDLE...</h2>
+  //       <div className="loading-spinner">⚡</div>
+  //     </div>
+  //   )
+  // }
 
   return (
     <>
