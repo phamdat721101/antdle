@@ -21,7 +21,7 @@ export function useBaseMiniApp() {
       }
     }
     
-    const isInMiniAppEnv = checkMiniAppEnvironment()
+    const isInMiniAppEnv = true
     setIsInMiniApp(isInMiniAppEnv)
 
     // Initialize SDK and signal ready state

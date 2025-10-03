@@ -38,7 +38,8 @@ export async function GET() {
       "ogTitle": "ANTDLE - Learn Bitcoin DeFi",
       "ogDescription": "Learn Bitcoin DeFi through simple lessons and fun challenges",
       "ogImageUrl": `${URL}/antdle_btc.png`,
-      "noindex": false
+      "noindex": true,
+      "castShareUrl":"https://antdle.xyz"
     }
   });
 }
