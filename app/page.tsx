@@ -19,6 +19,7 @@ export default function Home() {
   const { isFrameReady, setFrameReady, context } = useMiniKit();
   // Initialize the  miniapp
   useEffect(() => {
+    await sdk.actions.ready()
     if (!isFrameReady) {
       setFrameReady();
     }
