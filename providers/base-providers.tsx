@@ -25,30 +25,25 @@ const config = createConfig({
 const queryClient = new QueryClient()
 
 export function BaseProviders({ children }: { children: React.ReactNode }) {
-  useEffect(() => {
-    sdk.actions.ready();
-  }, [])
-  return (
-    <WagmiProvider config={config}>
-      <QueryClientProvider client={queryClient}>
-        <OnchainKitProvider
-          apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
-          chain={base}
-          config={{
-            appearance: {
-              mode: 'auto',
-              theme: 'base',
-            },
+  return (    
+    <QueryClientProvider client={queryClient}>
+      <OnchainKitProvider
+        apiKey={process.env.NEXT_PUBLIC_ONCHAINKIT_API_KEY}
+        chain={base}
+        config={{
+          appearance: {
+            mode: 'auto',
+            theme: 'base',
+          },
+        }}
+          miniKit={{
+              enabled: true,
+              autoConnect: true,
+              notificationProxyUrl: undefined,
           }}
-           miniKit={{
-                enabled: true,
-                autoConnect: true,
-                notificationProxyUrl: undefined,
-            }}
-        >
-          {children}
-        </OnchainKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+      >
+        {children}
+      </OnchainKitProvider>
+    </QueryClientProvider>
   )
 }
