@@ -21,6 +21,7 @@ export async function GET() {
       "name": "ANTDLE - Learn Bitcoin DeFi",
       "homeUrl": URL,
       "iconUrl": `${URL}/antdle_btc.png`,
+      "imageUrl": `${URL}/antdle_btc.png`,
       "splashImageUrl": `${URL}/antdle_btc.png`,
       "splashBackgroundColor": "#1a1a1a",
       "webhookUrl": `${URL}`,
