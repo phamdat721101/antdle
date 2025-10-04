@@ -10,18 +10,20 @@ import Portfolio from "@/components/portfolio"
 import ProtocolModal from "@/components/protocol-modal"
 import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
 import type { Protocol } from "@/lib/data"
-import { useQuickAuth,useMiniKit } from "@coinbase/onchainkit/minikit";
+import { useMiniKit } from "@coinbase/onchainkit/minikit"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
-  const { isFrameReady, setFrameReady, context } = useMiniKit();
-  // Initialize the  miniapp
+  const { isReady, setFrameReady } = useMiniKit()
+
+  // Initialize the miniapp and call ready
   useEffect(() => {
-    if (!isFrameReady) {
-      setFrameReady();
+    if (!isReady) {
+      // This automatically calls the ready signal
+      setFrameReady()
     }
-  }, [setFrameReady, isFrameReady]);
+  }, [setFrameReady, isReady])
 
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
@@ -31,25 +33,25 @@ export default function Home() {
     setSelectedProtocol(null)
   }
 
-  // Show loading screen while SDK initializes (only in mini-app environment)
-  // if (isFrameReady) {
-  //   return (
-  //     <div className="loading-container" style={{
-  //       display: 'flex',
-  //       justifyContent: 'center',
-  //       alignItems: 'center',
-  //       height: '100vh',
-  //       background: 'var(--pixel-bg-dark)',
-  //       color: 'var(--pixel-text-white)',
-  //       flexDirection: 'column',
-  //       gap: '20px'
-  //     }}>
-  //       <div className="pixel-logo" style={{ fontSize: '48px' }}>🎮</div>
-  //       <h2>Loading ANTDLE...</h2>
-  //       <div className="loading-spinner">⚡</div>
-  //     </div>
-  //   )
-  // }
+  // Show loading screen while MiniKit initializes
+  if (!isReady) {
+    return (
+      <div className="loading-container" style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        background: 'var(--pixel-bg-dark)',
+        color: 'var(--pixel-text-white)',
+        flexDirection: 'column',
+        gap: '20px'
+      }}>
+        <div className="pixel-logo" style={{ fontSize: '48px' }}>🎮</div>
+        <h2>Loading ANTDLE...</h2>
+        <div className="loading-spinner">⚡</div>
+      </div>
+    )
+  }
 
   return (
     <>
