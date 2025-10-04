@@ -23,7 +23,7 @@ export async function GET() {
       "iconUrl": `${URL}/antdle_btc.png`,
       "splashImageUrl": `${URL}/antdle_btc.png`,
       "splashBackgroundColor": "#1a1a1a",
-      "webhookUrl": `${URL}/api/webhook`,
+      "webhookUrl": `${URL}`,
       "subtitle": "Bitcoin DeFi Learning Platform",
       "description": "Learn Bitcoin DeFi through simple lessons and fun challenges. No confusing tech speak - just clear explanations anyone can understand.",
       "screenshotUrls": [
@@ -38,7 +38,6 @@ export async function GET() {
       "ogTitle": "ANTDLE - Learn Bitcoin DeFi",
       "ogDescription": "Learn Bitcoin DeFi through simple lessons and fun challenges",
       "ogImageUrl": `${URL}/antdle_btc.png`,
-      "noindex": true,
       "castShareUrl":"https://antdle.xyz"
     }
   });
