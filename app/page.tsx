@@ -10,20 +10,33 @@ import Portfolio from "@/components/portfolio"
 import ProtocolModal from "@/components/protocol-modal"
 import { useBaseMiniApp } from "@/hooks/use-base-mini-app"
 import type { Protocol } from "@/lib/data"
-import { useMiniKit } from "@coinbase/onchainkit/minikit"
+import { sdk } from "@farcaster/miniapp-sdk"
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
-  const { isReady, setFrameReady } = useMiniKit()
+  const [isSDKReady, setIsSDKReady] = useState(false)
 
-  // Initialize the miniapp and call ready
+  // Initialize the Farcaster SDK and call ready
   useEffect(() => {
-    if (!isReady) {
-      // This automatically calls the ready signal
-      setFrameReady()
+    const initializeSDK = async () => {
+      try {
+        // Check if we're in a frame environment
+        if (typeof window !== 'undefined' && window.parent !== window) {
+          // We're in an iframe, likely a frame
+          await sdk.actions.ready()
+          console.log('Frame SDK ready signal sent')
+        }
+        setIsSDKReady(true)
+      } catch (error) {
+        console.error('Failed to initialize Frame SDK:', error)
+        // Still set ready to true to prevent blocking the app
+        setIsSDKReady(true)
+      }
     }
-  }, [setFrameReady, isReady])
+
+    initializeSDK()
+  }, [])
 
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
@@ -33,8 +46,8 @@ export default function Home() {
     setSelectedProtocol(null)
   }
 
-  // Show loading screen while MiniKit initializes
-  if (!isReady) {
+  // Show loading screen while SDK initializes
+  if (!isSDKReady) {
     return (
       <div className="loading-container" style={{
         display: 'flex',

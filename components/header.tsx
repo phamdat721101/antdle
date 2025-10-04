@@ -8,7 +8,7 @@ interface HeaderProps {
 }
 
 export default function Header({ activeSection, onSectionChange }: HeaderProps) {
-  const { address, isConnected, connectWallet, disconnect, isInMiniApp, isSdkReady } = useBaseMiniApp()
+  const { address, isConnected, connectWallet, disconnect, isInMiniApp } = useBaseMiniApp()
 
   const formatAddress = (address: string) => {
     return `${address.slice(0, 6)}...${address.slice(-4)}`
@@ -24,7 +24,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
             </div>
             <h1>
               ANTDLE 
-              {isInMiniApp && isSdkReady && <span className="text-blue-500">⚡</span>}
+              {isInMiniApp && <span className="text-blue-500">⚡</span>}
             </h1>
           </div>
           <nav className="header__nav">
@@ -58,7 +58,24 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
             >
               <span className="nav-icon">👤</span> PROFILE
             </button> */}
-          </nav>          
+          </nav>
+          <div className="header__wallet">
+            {isConnected ? (
+              <button 
+                className="btn-pixel btn-secondary"
+                onClick={() => disconnect()}
+              >
+                {formatAddress(address!)}
+              </button>
+            ) : (
+              <button 
+                className="btn-pixel btn-primary"
+                onClick={connectWallet}
+              >
+                Connect Wallet
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </header>
