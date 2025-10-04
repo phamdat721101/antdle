@@ -46,7 +46,7 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
             >
               <span className="nav-icon">⚡</span> EVENTS
             </button>
-            <button
+            {/* <button
               className={`nav-btn ${activeSection === "premium" ? "active" : ""}`}
               onClick={() => onSectionChange("premium")}
             >
@@ -57,26 +57,8 @@ export default function Header({ activeSection, onSectionChange }: HeaderProps) 
               onClick={() => onSectionChange("portfolio")}
             >
               <span className="nav-icon">👤</span> PROFILE
-            </button>
-          </nav>
-          <div className="header__wallet">
-            {isConnected ? (
-              <button 
-                className="btn-pixel btn-secondary"
-                onClick={() => disconnect()}
-              >
-                {formatAddress(address!)}
-              </button>
-            ) : (
-              <button 
-                className="btn-pixel btn-primary"
-                onClick={connectWallet}
-                disabled={isInMiniApp && !isSdkReady}
-              >
-                {isInMiniApp && !isSdkReady ? 'Loading...' : 'Connect Wallet'}
-              </button>
-            )}
-          </div>
+            </button> */}
+          </nav>          
         </div>
       </div>
     </header>

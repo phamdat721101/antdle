@@ -14,58 +14,6 @@ export default function Dashboard({ onProtocolClick, onNavigate }: DashboardProp
 
   return (
     <div className="dashboard">
-      <div className="dashboard__hero">
-        <div className="hero-content">
-          <div className="hero-logo">
-            <div className="pixel-hero-logo">🎮</div>
-          </div>
-          <h2>WELCOME TO ANTDLE</h2>
-          <p>
-            Learn Bitcoin DeFi through simple lessons and fun challenges. No confusing tech speak - just clear
-            explanations anyone can understand.
-          </p>
-        </div>
-        <div className="player-stats">
-          <div className="stat-block">
-            <div className="stat-icon">🎯</div>
-            <div className="stat-info">
-              <div className="stat-value">Level {playerStats.level}</div>
-              <div className="stat-label">Your Level</div>
-            </div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-icon">⭐</div>
-            <div className="stat-info">
-              <div className="stat-value">{playerStats.xp}</div>
-              <div className="stat-label">Experience Points</div>
-            </div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-icon">🏆</div>
-            <div className="stat-info">
-              <div className="stat-value">{playerStats.completedLessons}</div>
-              <div className="stat-label">Completed Lessons</div>
-            </div>
-          </div>
-          <div className="stat-block">
-            <div className="stat-icon">💎</div>
-            <div className="stat-info">
-              <div className="stat-value">{playerStats.achievements}</div>
-              <div className="stat-label">Achievements</div>
-            </div>
-          </div>
-        </div>
-        <div className="xp-bar">
-          <div className="xp-bar-label">Progress to Next Level</div>
-          <div className="xp-bar-container">
-            <div className="xp-bar-fill" style={{ width: "60%" }}></div>
-            <div className="xp-bar-text">
-              {playerStats.xp} / {playerStats.xp + playerStats.xpToNext} XP
-            </div>
-          </div>
-        </div>
-      </div>
-
       <div className="dashboard__content">
         <div className="content-grid">
           <div className="content-panel">
