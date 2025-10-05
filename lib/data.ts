@@ -50,6 +50,7 @@ export interface PlayerStats {
   xpToNext: number
   completedLessons: number
   achievements: number
+  streak: number // Add this missing property
 }
 
 export const protocols: Protocol[] = [
@@ -280,4 +281,5 @@ export const playerStats: PlayerStats = {
   xpToNext: 100,
   completedLessons: 8,
   achievements: 2,
+  streak: 7, // Add this missing property
 }

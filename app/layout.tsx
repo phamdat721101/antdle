@@ -1,5 +1,5 @@
 import type React from "react"
-import type { Metadata } from "next"
+import type { Metadata, Viewport } from "next"
 import { BaseProviders } from "@/providers/base-providers"
 import "./globals.css"
 
@@ -24,7 +24,14 @@ export async function generateMetadata(): Promise<Metadata> {
       'fc:frame:button:1:target': 'https://antdle.xyz',
     },
   }
-  
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+  userScalable: false,
+  themeColor: '#1a1a1a',
 }
 
 export default function RootLayout({

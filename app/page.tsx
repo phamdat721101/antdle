@@ -16,6 +16,7 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("dashboard")
   const [selectedProtocol, setSelectedProtocol] = useState<Protocol | null>(null)
   const [isSDKReady, setIsSDKReady] = useState(false)
+  const [showHeaderFab, setShowHeaderFab] = useState(false)
 
   // Initialize the Farcaster SDK and call ready
   useEffect(() => {
@@ -38,12 +39,33 @@ export default function Home() {
     initializeSDK()
   }, [])
 
+  // Monitor scroll to show/hide FAB
+  useEffect(() => {
+    const handleScroll = () => {
+      const isMobile = window.innerWidth < 768
+      const scrolled = window.scrollY > 200
+      setShowHeaderFab(isMobile && scrolled)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
   const handleProtocolClick = (protocol: Protocol) => {
     setSelectedProtocol(protocol)
   }
 
   const handleCloseModal = () => {
     setSelectedProtocol(null)
+  }
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   // Show loading screen while SDK initializes
@@ -93,6 +115,17 @@ export default function Home() {
       </main>
 
       {selectedProtocol && <ProtocolModal protocol={selectedProtocol} onClose={handleCloseModal} />}
+
+      {/* Optional: Floating Action Button to show header */}
+      {showHeaderFab && (
+        <button 
+          className="header-toggle-fab"
+          onClick={scrollToTop}
+          aria-label="Scroll to top"
+        >
+          ↑
+        </button>
+      )}
     </>
   )
 }
