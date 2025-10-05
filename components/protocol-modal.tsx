@@ -12,7 +12,9 @@ export default function ProtocolModal({ protocol, onClose }: ProtocolModalProps)
   const { openUrl } = useBaseMiniApp()
 
   const handleLearnMore = () => {
-    openUrl(protocol.learnMoreUrl)
+    if (protocol.learnMoreUrl) {
+      openUrl(protocol.learnMoreUrl)
+    }
   }
 
   return (
@@ -28,11 +30,39 @@ export default function ProtocolModal({ protocol, onClose }: ProtocolModalProps)
           </button>
         </div>
 
-        <div style={{ padding: "32px" }}>
+        <div className="modal__body">
           <div className="protocol-details">
+            <div className="protocol-modal-header">
+              <span className="status">{protocol.type}</span>
+              <span className="status" style={{ marginLeft: '12px' }}>{protocol.status}</span>
+            </div>
+
             <div className="detail-section">
               <h4>What is {protocol.name}?</h4>
               <p>{protocol.simpleDescription}</p>
+            </div>
+
+            <div className="protocol-modal-metrics">
+              <div className="metric-row">
+                <span>Potential Returns:</span>
+                <span className="metric-value">{protocol.apy}</span>
+              </div>
+              <div className="metric-row">
+                <span>Current Status:</span>
+                <span className="metric-value">{protocol.status}</span>
+              </div>
+              {protocol.tvl && (
+                <div className="metric-row">
+                  <span>TVL/Funding:</span>
+                  <span className="metric-value">{protocol.tvl}</span>
+                </div>
+              )}
+              {protocol.funding && (
+                <div className="metric-row">
+                  <span>Recent Funding:</span>
+                  <span className="metric-value">{protocol.funding}</span>
+                </div>
+              )}
             </div>
 
             <div className="detail-section">
@@ -44,81 +74,40 @@ export default function ProtocolModal({ protocol, onClose }: ProtocolModalProps)
               </ul>
             </div>
 
-            <div className="stats-grid">
-              <div className="stat-item">
-                <div className="stat-label">Returns</div>
-                <div className="stat-value">{protocol.apy}</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-label">Difficulty</div>
-                <div className="stat-value">{protocol.difficulty}</div>
-              </div>
-              <div className="stat-item">
-                <div className="stat-label">Status</div>
-                <div className="stat-value">{protocol.status}</div>
+            {/* Latest News Section */}
+            <div className="latest-news-section">
+              <h4>🚨 Latest News</h4>
+              <div className="latest-news-item">
+                <p>{protocol.latestNews}</p>
               </div>
             </div>
 
             <div className="learning-modules">
-              <h4>Learning Path</h4>
+              <h4>Ready to Start</h4>
               <div className="modules-list">
-                <div
-                  className="module-item"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "16px",
-                    background: "var(--pixel-bg-darker)",
-                    border: "3px solid var(--pixel-orange-primary)",
-                    clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
-                    marginBottom: "12px",
-                  }}
-                >
-                  <span style={{ color: "var(--pixel-text-white)", fontSize: "14px" }}>📖 Basic Concepts</span>
-                  <span style={{ color: "var(--pixel-text-gray)", fontSize: "12px" }}>+50 XP</span>
+                <div className="module-item">
+                  <span>📚 Read Official Documentation</span>
+                  <span>Start Here</span>
                 </div>
-                <div
-                  className="module-item"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "16px",
-                    background: "var(--pixel-bg-darker)",
-                    border: "3px solid var(--pixel-orange-primary)",
-                    clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
-                    marginBottom: "12px",
-                  }}
-                >
-                  <span style={{ color: "var(--pixel-text-white)", fontSize: "14px" }}>⚙️ How It Works</span>
-                  <span style={{ color: "var(--pixel-text-gray)", fontSize: "12px" }}>+75 XP</span>
+                <div className="module-item">
+                  <span>🛠️ Join Developer Community</span>
+                  <span>Builders</span>
                 </div>
-                <div
-                  className="module-item"
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    padding: "16px",
-                    background: "var(--pixel-bg-darker)",
-                    border: "3px solid var(--pixel-orange-primary)",
-                    clipPath: "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px))",
-                  }}
-                >
-                  <span style={{ color: "var(--pixel-text-white)", fontSize: "14px" }}>🏆 Hands-On Practice</span>
-                  <span style={{ color: "var(--pixel-text-gray)", fontSize: "12px" }}>+100 XP</span>
+                <div className="module-item">
+                  <span>💰 Explore Funding Opportunities</span>
+                  <span>Earn</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+
         <div className="modal__footer">
           <button className="btn-pixel btn-secondary" onClick={onClose}>
             CLOSE
           </button>
           <button className="btn-pixel btn-primary" onClick={handleLearnMore}>
-            LEARN MORE
+            VISIT PROTOCOL
           </button>
         </div>
       </div>
